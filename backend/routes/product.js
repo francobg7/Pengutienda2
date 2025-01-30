@@ -1,8 +1,8 @@
 import express from 'express';
-import { getAllProductsAPI } from '../controllers/productController.js';
+import { getAllProducts } from '../controllers/productController.js';
 
 const router = express.Router();
 
-router.get('/admin/products', getAllProductsAPI);
+router.get('/admin/products', getAllProducts);
 
 export default router;
