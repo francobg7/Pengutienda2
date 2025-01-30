@@ -7,7 +7,9 @@ import bcrypt from 'bcrypt';
 import { fileURLToPath } from 'url';
 import adminRoutes from './routes/admin.js';
 import orderRoutes from './routes/order.js';
+import productRoutes from './routes/product.js';
 import User from './models/User.js';
+import router from './routes/admin.js';
 
 dotenv.config();
 
@@ -23,6 +25,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/admin', router)
 app.use(cors());
 
 // Configuración de archivos estáticos
@@ -36,6 +39,7 @@ app.get('/', (req, res) => {
 // Rutas de la aplicación
 app.use('/', adminRoutes);
 app.use('/orders', orderRoutes);
+app.use('/product', productRoutes);
 
 // Manejo de errores 404
 app.use((req, res, next) => {
