@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pedidos - Admin Panel</title>
+</head>
+<body>
+    <h1>Pedidos Recibidos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Productos</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% orders.forEach(order => { %>
+                <tr>
+                    <td><%= order.name %></td>
+                    <td><%= order.address %></td>
+                    <td>
+                        <ul>
+                            <% order.products.forEach(product => { %>
+                                <li><%= product %></li>
+                            <% }); %>
+                        </ul>
+                    </td>
+                    <td><%= order.date %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

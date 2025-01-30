@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Creacion</title>
+    </head>
+    <body>
+        <h1>Administrar Productos</h1>
+        <form action="/admin/products/create" method="POST">
+            <input type="text" name="name" placeholder="Nombre del Producto" required>
+            <input type="number" name="price" placeholder="Precio" required>
+            <input type="text" name="description" placeholder="Descripción">
+            <button type="submit">Crear Producto</button>
+        </form>
+    </body>
+</html>

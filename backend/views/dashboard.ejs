@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Panel de Admin</title>
+</head>
+<body>
+    <h1>Bienvenida, <%= user.usuario %></h1>
+    <ul>
+        <li><a href="#" onclick="navigateWithToken('/admin/products')">Administrar Productos</a></li>
+        <li><a href="#" onclick="navigateWithToken('/orders')">Ver Pedidos</a></li>
+    </ul>
+    <button onclick="cerrarSesion()">Cerrar Sesión</button>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
