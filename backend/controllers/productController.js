@@ -1,12 +1,14 @@
 import Product from '../models/Product.js';
 
-// Obtener todos los productos para la API y vistas
 export const getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find();
-    res.render('products', { products });
-  } catch (err) {
-    res.status(500).send("Error al obtener productos: " + err.message);
+    console.log("Entró a getAllProducts");  
+    const products = await Product.find({});
+    console.log("Productos obtenidos:", products);
+    res.render('products', { products, user: null }); 
+  } catch (error) {
+    console.error("Error en getAllProducts:", error);
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -26,7 +28,7 @@ export const createProduct = async (req, res) => {
   try {
     const { name, price, description } = req.body;
     await Product.create({ name, price, description });
-    res.redirect('/admin/products/descripcion');
+    res.redirect('/admin/products');
   } catch (err) {
     res.status(500).send("Error al crear producto: " + err.message);
   }
