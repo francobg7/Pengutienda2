@@ -11,8 +11,6 @@
                 <th>Nombre</th>
                 <th>Precio</th>
                 <th>Descripción</th>
-                <th>Stock</th>
-                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -21,13 +19,11 @@
                     <td><%= product.name %></td>
                     <td>$<%= product.price %></td>
                     <td><%= product.description %></td>
-                    <td><%= product.stock %></td>
                     <td>
                         <form action="/products/edit/<%= product._id %>" method="POST">
                             <input type="text" name="name" value="<%= product.name %>" required>
                             <input type="number" name="price" value="<%= product.price %>" required>
                             <input type="text" name="description" value="<%= product.description %>">
-                            <input type="number" name="stock" value="<%= product.stock %>" required>
                             <button type="submit">Editar</button>
                         </form>
                         <form action="/products/delete/<%= product._id %>" method="POST">
@@ -44,7 +40,6 @@
         <input type="text" name="name" placeholder="Nombre del Producto" required>
         <input type="number" name="price" placeholder="Precio" required>
         <input type="text" name="description" placeholder="Descripción">
-        <input type="number" name="stock" placeholder="Stock" required>
         <button type="submit">Crear Producto</button>
     </form>
 </body>
