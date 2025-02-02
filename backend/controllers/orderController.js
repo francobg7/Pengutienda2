@@ -1,4 +1,5 @@
 import Order from "../models/Order.js";
+import Product from "../models/Product.js";
 
 // Registrar un nuevo pedido
 export const createOrder = async (req, res) => {
