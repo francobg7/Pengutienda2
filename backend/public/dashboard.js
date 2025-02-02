@@ -1,4 +1,4 @@
-// Función útil para verificar la autenticación
+// Mantener la función de verificación solo para rutas privadas
 function verificarAutenticacion() {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -10,62 +10,47 @@ function verificarAutenticacion() {
 
 // Evento principal cuando carga el dashboard
 document.addEventListener('DOMContentLoaded', async () => {
+    // Verificamos si el usuario está autenticado solo para rutas privadas
+    const token = verificarAutenticacion();
+    if (!token) return;
+
+    // Agregar event listener para el enlace de administrar productos (solo para rutas privadas)
+    const adminProductsLink = document.querySelector('[href="/admin/products"]');
+    if (adminProductsLink) {
+        adminProductsLink.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await navigateWithToken('/admin/products');
+        });
+    }
+});
+
+// Función modificada para navegar con el token solo en rutas privadas
+async function navigateWithToken(url) {
     const token = verificarAutenticacion();
     if (!token) return;
 
     try {
-        const response = await fetch('/admin/dashboard', {  // Corregida la ruta
+        const response = await fetch(url, {
+            method: 'GET',
+            credentials: 'same-origin',
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'Accept': 'text/html'
             }
         });
-        
+
         if (!response.ok) {
-            localStorage.removeItem('token');
-            throw new Error('Error de autenticación');
+            throw new Error('Error de navegación');
         }
-        
-        const data = await response.json();
-        // Aquí puedes actualizar el contenido del dashboard si es necesario
-        
+
+        window.location.href = url;
     } catch (error) {
         console.error('Error:', error);
         window.location.href = '/login';
     }
-});
-
-// Función para navegar con el token
-async function navigateWithToken(url) {
-    const token = verificarAutenticacion();
-    if (!token) return;
-    
-    try {
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
-        
-        if (!response.ok) {
-            throw new Error('Error de navegación');
-        }
-        
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-            const data = await response.json();
-            // Manejar la respuesta JSON si es necesario
-        } else {
-            window.location.href = url;
-        }
-    } catch (error) {
-        console.error(error);
-        window.location.href = '/login';
-    }
 }
 
-// Función para cerrar sesión
+// Mantener la función de cerrar sesión
 function cerrarSesion() {
     localStorage.removeItem('token');
     window.location.href = '/login';
