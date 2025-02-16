@@ -1,7 +1,7 @@
 # Pengutienda2 
 
 Sistema de tienda online con panel de administración, desarrollado con Node.js y Go. El proyecto consta de dos partes principales:
-- Panel de Administración (Backend - Node.js)
+- Panel de Administración (Backend - JavaScript/JNode.js)
 - Tienda Online (Frontend - Go)
 
 ## Características principales
